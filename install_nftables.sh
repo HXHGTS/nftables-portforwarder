@@ -10,13 +10,23 @@ sysctl -p
 
 echo "正在安装nftables与nslookup. . ."
 
+systemctl stop firewalld && systemctl disable firewalld
+
+systemctl stop iptables && systemctl disable iptables
+
+setenforce 0
+
 yum install nftables bind-utils -y
 
 echo "正在配置nftables默认规则. . ."
 
-nft flush table ip filter
+nft add table ip filter
 
-nft delete chain ip filter
+nft add chain ip filter INPUT
+
+nft add chain ip filter FORWARD
+
+nft add chain ip filter OUTPUT
 
 echo "正在启动nftables. . ."
 
