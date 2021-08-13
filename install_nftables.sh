@@ -28,9 +28,9 @@ nft add chain ip filter FORWARD
 
 nft add chain ip filter OUTPUT
 
-add rule ip filter FORWARD tcp dport 22 ct state new counter accept
+nft add rule ip filter FORWARD tcp dport 22 ct state new counter accept
 
-add rule ip filter FORWARD tcp dport 80 ct state new counter accept
+nft add rule ip filter FORWARD tcp dport 80 ct state new counter accept
 
 echo "正在启动nftables. . ."
 
